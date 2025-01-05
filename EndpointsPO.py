@@ -31,10 +31,16 @@ class EndpointPage(BasePage):
     def input_delay(self, delay):
         self.input_text(self.ENDPOINT_DELAY_INPUT, delay)
 
-    def find_name_in_endpoints(self, name: str) -> bool:
+    def verify_endpoint_creation(self, name: str) -> bool:
         try:
-            self.get_text_in_element((By.XPATH, f"//h3[contains(text(), '{name}')]"))
+            self.get_text_in_element((By.XPATH, f"//h3[text() = '{name}']"))
             return True
-        except Exception as e:
+        except Exception:
             return False
+        
+    def remove_endpont_after_test(self):
+        try:
+            self.click((By.XPATH, "//button[contains(text(), 'Delete')]"))
+        except Exception:
+            print("No endpoint found to delete")
         

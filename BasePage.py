@@ -20,8 +20,8 @@ class BasePage:
         self.find_element(by_locator).clear()
         self.find_element(by_locator).send_keys(text)
 
-    def wait_for_element(self, by_locator, timeout=10):
-        return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located(by_locator))
+    def wait_for_element(self, by_locator, timeout=5, poll_frequency=1.5):
+        return WebDriverWait(self.driver, timeout, poll_frequency).until(EC.presence_of_element_located(by_locator))
     
     def refresh_page(self):
         self.driver.refresh()
